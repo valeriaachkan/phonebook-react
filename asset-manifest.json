@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/valeriaachkan/phonebook-react/static/css/main.f82dbb50.css",
+    "main.js": "/valeriaachkan/phonebook-react/static/js/main.c2543a9b.js",
+    "static/js/787.e8b4e084.chunk.js": "/valeriaachkan/phonebook-react/static/js/787.e8b4e084.chunk.js",
+    "index.html": "/valeriaachkan/phonebook-react/index.html",
+    "main.f82dbb50.css.map": "/valeriaachkan/phonebook-react/static/css/main.f82dbb50.css.map",
+    "main.c2543a9b.js.map": "/valeriaachkan/phonebook-react/static/js/main.c2543a9b.js.map",
+    "787.e8b4e084.chunk.js.map": "/valeriaachkan/phonebook-react/static/js/787.e8b4e084.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f82dbb50.css",
+    "static/js/main.c2543a9b.js"
+  ]
+}
