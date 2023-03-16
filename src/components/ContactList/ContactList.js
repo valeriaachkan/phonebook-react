@@ -1,12 +1,16 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import ContactItem from './ContactItem';
+import s from './ContactList.module.css';
 
-const ContactList = ({ contacts, onDelete }) => {
+const ContactList = ({ contacts, onDelete, children }) => {
   return (
-    <ul>
-      <ContactItem contacts={contacts} onDelete={onDelete} />
-    </ul>
+    <div className={s.contacts}>
+      {children}
+      <ul className={s.list}>
+        <ContactItem contacts={contacts} onDelete={onDelete} />
+      </ul>
+    </div>
   );
 };
 

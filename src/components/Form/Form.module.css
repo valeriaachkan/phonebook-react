@@ -1,0 +1,38 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    padding: 20px 16px;
+    background: #FFFFFF;
+    border-radius: 11px;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 7px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.input {
+    width: 200px;
+    padding: 5px;
+    margin-top: 4px;
+    border: 2px solid #007AFF;
+    border-radius: 7px;
+    outline: none;
+}
+
+.button {
+    width: fit-content;
+    margin-top: 10px;
+    padding: 7px;
+    border: 0;
+    outline: 0;
+    background: #007AFF;
+    border-radius: 7px;
+    color: #FFFFFF;
+    cursor: pointer;
+}

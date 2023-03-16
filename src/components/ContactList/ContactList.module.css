@@ -1,0 +1,42 @@
+.contacts {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    min-height: 500px;
+    padding: 20px 16px;
+    background: #FFFFFF;
+    border-radius: 11px;
+}
+
+.list {
+    margin-top: 20px;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.avatar {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    background-color: #8E8E93;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.number {
+    font-size: 13px;
+    color: rgba(60, 60, 67, 0.6);
+}
+
+.button {
+    margin-left: auto;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}

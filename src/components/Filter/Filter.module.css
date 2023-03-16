@@ -1,0 +1,23 @@
+.filter {
+    position: relative;
+    width: 100%;
+}
+
+.icon {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+
+}
+
+.input {
+    width: 100%;
+    padding: 7px;
+    padding-left: 30px;
+    background: rgba(118, 118, 128, 0.12);
+    border-radius: 7px;
+    border: 0;
+    outline: 0;
+    font-size: 14px;
+}
+
