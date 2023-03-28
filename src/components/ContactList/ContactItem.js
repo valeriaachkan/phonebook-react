@@ -2,9 +2,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 import s from './ContactList.module.css';
 
-const ContactItem = ({ contacts, onDelete }) => {
-  return contacts.map(({ id, name, number }) => (
-    <li key={id} className={s.item}>
+const ContactItem = ({ contact, onDelete }) => {
+  return (
+    <>
       <svg
         className={s.avatar}
         fill="#ffffff"
@@ -15,10 +15,13 @@ const ContactItem = ({ contacts, onDelete }) => {
         <path d="M16 15.503A5.041 5.041 0 1 0 16 5.42a5.041 5.041 0 0 0 0 10.083zm0 2.215c-6.703 0-11 3.699-11 5.5v3.363h22v-3.363c0-2.178-4.068-5.5-11-5.5z" />
       </svg>
       <div>
-        <p>{name}</p>
-        <span className={s.number}>{number}</span>
+        <p>{contact.name}</p>
+        <span className={s.number}>{contact.number}</span>
       </div>
-      <button type="button" className={s.button} onClick={() => onDelete(id)}>
+      <button
+        type="button"
+        className={s.button}
+        onClick={() => onDelete(contact.id)}>
         <svg
           width="20px"
           height="20px"
@@ -31,12 +34,12 @@ const ContactItem = ({ contacts, onDelete }) => {
             fill="#8E8E93"></path>
         </svg>
       </button>
-    </li>
-  ));
+    </>
+  );
 };
 
 ContactItem.propTypes = {
-  contacts: propTypes.arrayOf(propTypes.object),
+  contact: propTypes.object,
   onDelete: propTypes.func,
 };
 
