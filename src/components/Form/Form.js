@@ -54,7 +54,6 @@ export const Form = () => {
       return;
     }
 
-    console.log('succes', name, number);
     dispatch(addContact(name, number));
     resetForm();
   };

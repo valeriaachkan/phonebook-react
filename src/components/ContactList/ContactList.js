@@ -11,10 +11,13 @@ function ContactList({ children }) {
 
   const filteredContacts = () => {
     const normalizedFilter = filter.toLowerCase().trim();
+    const filteredContactsList = [
+      ...contacts.filter(({ name }) =>
+        name.toLowerCase().includes(normalizedFilter),
+      ),
+    ];
 
-    return contacts.filter(({ name }) =>
-      name.toLowerCase().includes(normalizedFilter),
-    );
+    return filteredContactsList;
   };
 
   const filteredContactList = filteredContacts();
