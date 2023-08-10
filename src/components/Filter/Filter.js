@@ -1,8 +1,19 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { setFilter } from '../../redux/filterSlice';
+import { getFilter } from '../../redux/selectors';
 import s from './Filter.module.css';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Filter = ({ value, onChange }) => {
+const Filter = () => {
+  const filter = useSelector(getFilter);
+  const dispatch = useDispatch();
+
+  const handleChange = e => {
+    const { value } = e.currentTarget;
+    dispatch(setFilter(value));
+  };
+
   return (
     <div className={s.filter}>
       <svg
@@ -21,8 +32,8 @@ const Filter = ({ value, onChange }) => {
         <input
           type="text"
           className={s.input}
-          value={value}
-          onChange={onChange}
+          value={filter}
+          onChange={handleChange}
           placeholder="Find contacts by name"></input>
       </label>
     </div>

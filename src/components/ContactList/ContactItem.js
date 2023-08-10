@@ -1,8 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import s from './ContactList.module.css';
+import { deleteContact } from '../../redux/contactsSlice';
+import { useDispatch } from 'react-redux';
 
-const ContactItem = ({ contact, onDelete }) => {
+const ContactItem = ({ contact }) => {
+  const dispatch = useDispatch();
+  const handleDelete = () => dispatch(deleteContact(contact.id));
+
   return (
     <>
       <svg
@@ -18,10 +23,7 @@ const ContactItem = ({ contact, onDelete }) => {
         <p>{contact.name}</p>
         <span className={s.number}>{contact.number}</span>
       </div>
-      <button
-        type="button"
-        className={s.button}
-        onClick={() => onDelete(contact.id)}>
+      <button type="button" className={s.button} onClick={handleDelete}>
         <svg
           width="20px"
           height="20px"

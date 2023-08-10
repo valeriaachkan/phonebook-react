@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
+import { getContacts } from '../../redux/selectors';
 import { nanoid } from 'nanoid';
 import propTypes from 'prop-types';
 import s from './Form.module.css';
 
-function Form({ onSubmit, contacts }) {
+export const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const nameInputId = nanoid();
   const numberInputId = nanoid();
+
+  const dispatch = useDispatch();
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -26,13 +31,13 @@ function Form({ onSubmit, contacts }) {
     }
   };
 
+  const contacts = useSelector(getContacts);
+
   const checkUniqueness = () => {
     const newName = name.toLowerCase();
-    return contacts
-      .map(({ name }) => name.toLowerCase() === newName)
-      .includes(true)
-      ? false
-      : true;
+    return contacts.map(({ name }) => name.toLowerCase()).includes(newName)
+      ? true
+      : false;
   };
 
   const resetForm = () => {
@@ -43,18 +48,19 @@ function Form({ onSubmit, contacts }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (!checkUniqueness()) {
+    if (checkUniqueness()) {
       alert(`${name} is already in contacts.`);
       resetForm();
       return;
     }
 
-    onSubmit({ name, number });
+    console.log('succes', name, number);
+    dispatch(addContact(name, number));
     resetForm();
   };
 
   return (
-    <form className={s.form} onSubmit={handleSubmit}>
+    <form className={s.form}>
       <label className={s.label} htmlFor={nameInputId}>
         name
         <input
@@ -64,7 +70,7 @@ function Form({ onSubmit, contacts }) {
           value={name}
           id={nameInputId}
           onChange={handleChange}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          pattern="^[a-zA-Z]*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
@@ -78,17 +84,17 @@ function Form({ onSubmit, contacts }) {
           value={number}
           id={numberInputId}
           onChange={handleChange}
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          pattern="^[0-9]*$"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
       </label>
-      <button className={s.button} type="submit">
+      <button className={s.button} type="submit" onClick={handleSubmit}>
         Add contact
       </button>
     </form>
   );
-}
+};
 
 Form.propTypes = {
   onSubmit: propTypes.func,
