@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/valeriaachkan/phonebook-react/static/css/main.f82dbb50.css",
-    "main.js": "/valeriaachkan/phonebook-react/static/js/main.c2543a9b.js",
-    "static/js/787.e8b4e084.chunk.js": "/valeriaachkan/phonebook-react/static/js/787.e8b4e084.chunk.js",
-    "index.html": "/valeriaachkan/phonebook-react/index.html",
-    "main.f82dbb50.css.map": "/valeriaachkan/phonebook-react/static/css/main.f82dbb50.css.map",
-    "main.c2543a9b.js.map": "/valeriaachkan/phonebook-react/static/js/main.c2543a9b.js.map",
-    "787.e8b4e084.chunk.js.map": "/valeriaachkan/phonebook-react/static/js/787.e8b4e084.chunk.js.map"
+    "main.css": "/static/css/main.3e7c3b03.css",
+    "main.js": "/static/js/main.38dae522.js",
+    "static/js/787.e8b4e084.chunk.js": "/static/js/787.e8b4e084.chunk.js",
+    "index.html": "/index.html",
+    "main.3e7c3b03.css.map": "/static/css/main.3e7c3b03.css.map",
+    "main.38dae522.js.map": "/static/js/main.38dae522.js.map",
+    "787.e8b4e084.chunk.js.map": "/static/js/787.e8b4e084.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f82dbb50.css",
-    "static/js/main.c2543a9b.js"
+    "static/css/main.3e7c3b03.css",
+    "static/js/main.38dae522.js"
   ]
 }
