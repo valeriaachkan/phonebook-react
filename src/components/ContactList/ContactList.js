@@ -1,13 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { getContacts, getFilter } from '../../redux/selectors';
 import ContactItem from './ContactItem';
-import s from './ContactList.module.css';
 import { useSelector } from 'react-redux';
+import { selectContacts, selectFilter } from '../../redux/contacts/selectors';
+import { Box, List, ListItem, ListDivider } from '@mui/joy';
 
-function ContactList({ children }) {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+function ContactList() {
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
 
   const filteredContacts = () => {
     const normalizedFilter = filter.toLowerCase().trim();
@@ -23,16 +23,18 @@ function ContactList({ children }) {
   const filteredContactList = filteredContacts();
 
   return (
-    <div className={s.contacts}>
-      {children}
-      <ul className={s.list}>
+    <Box>
+      <List size="lg">
         {filteredContactList.map(contact => (
-          <li key={contact.id} className={s.item}>
-            <ContactItem contact={contact} />
-          </li>
+          <>
+            <ListItem key={contact.id}>
+              <ContactItem contact={contact} />
+            </ListItem>
+            <ListDivider inset="gutter" />
+          </>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Box>
   );
 }
 

@@ -1,97 +1,87 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
-import { getContacts } from '../../redux/selectors';
-import { nanoid } from 'nanoid';
 import propTypes from 'prop-types';
-import s from './Form.module.css';
+import { addContact } from '../../redux/contacts/operations';
+import { selectContacts } from '../../redux/contacts/selectors';
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Sheet,
+  Stack,
+  Typography,
+} from '@mui/joy';
+import { Notify } from 'notiflix';
 
 export const Form = () => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-
-  const nameInputId = nanoid();
-  const numberInputId = nanoid();
-
   const dispatch = useDispatch();
 
-  const handleChange = e => {
-    const { name, value } = e.currentTarget;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
+  const contacts = useSelector(selectContacts);
+  console.log('contacts', contacts);
 
-      case 'number':
-        setNumber(value);
-        break;
-
-      default:
-        return;
-    }
-  };
-
-  const contacts = useSelector(getContacts);
-
-  const checkUniqueness = () => {
-    const newName = name.toLowerCase();
-    return contacts.map(({ name }) => name.toLowerCase()).includes(newName)
+  const checkUniqueness = newName => {
+    return contacts
+      .map(({ name }) => name.toLowerCase())
+      .includes(newName.toLowerCase())
       ? true
       : false;
   };
 
-  const resetForm = () => {
-    setName('');
-    setNumber('');
-  };
-
   const handleSubmit = e => {
     e.preventDefault();
+    const form = e.currentTarget;
+    const name = form.elements.name.value;
+    const number = form.elements.number.value;
 
-    if (checkUniqueness()) {
-      alert(`${name} is already in contacts.`);
-      resetForm();
+    if (checkUniqueness(name)) {
+      Notify.warning(`${name} is already in contacts.`);
+      form.reset();
       return;
     }
 
-    dispatch(addContact(name, number));
-    resetForm();
+    dispatch(addContact({ name, number }));
+    form.reset();
   };
 
   return (
-    <form className={s.form}>
-      <label className={s.label} htmlFor={nameInputId}>
-        name
-        <input
-          type="text"
-          name="name"
-          className={s.input}
-          value={name}
-          id={nameInputId}
-          onChange={handleChange}
-          pattern="^[a-zA-Z]*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-        />
-      </label>
-      <label className={s.label} htmlFor={numberInputId}>
-        number
-        <input
-          type="tel"
-          name="number"
-          className={s.input}
-          value={number}
-          id={numberInputId}
-          onChange={handleChange}
-          pattern="^[0-9]*$"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-        />
-      </label>
-      <button className={s.button} type="submit" onClick={handleSubmit}>
-        Add contact
-      </button>
-    </form>
+    <Sheet
+      sx={{
+        mx: 'auto',
+        mt: '150px',
+        py: '25px',
+        px: '25px',
+        maxWidth: '500px',
+        borderRadius: 'xl',
+        boxShadow: 'md',
+      }}
+      variant="plain">
+      <Typography level="h4" sx={{ mb: '15px' }}>
+        Phonebook
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        <Stack gap={1}>
+          <FormControl required>
+            <FormLabel>Name</FormLabel>
+            <Input type="text" name="name" autoComplete="off" />
+          </FormControl>
+          <FormControl required>
+            <FormLabel>Number</FormLabel>
+            <Input
+              type="tel"
+              name="number"
+              pattern="^[0-9]*$"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            />
+          </FormControl>
+        </Stack>
+        <Stack gap={2} sx={{ mt: 3 }}>
+          <Button type="submit" fullWidth>
+            Add contact
+          </Button>
+        </Stack>
+      </form>
+    </Sheet>
   );
 };
 

@@ -1,12 +1,24 @@
+import { Sheet, Typography } from '@mui/joy';
 import React from 'react';
-import s from './Section.module.css';
 
 const Section = ({ title, children }) => {
   return (
-    <section className={s.section}>
-      <h2 className={s.title}>{title}</h2>
+    <Sheet
+      sx={{
+        mx: 'auto',
+        mt: '70px',
+        py: '25px',
+        px: '25px',
+        maxWidth: '500px',
+        borderRadius: 'xl',
+        boxShadow: 'md',
+      }}
+      variant="plain">
+      <Typography level="h4" sx={{ mb: '15px' }}>
+        {title}
+      </Typography>
       {children}
-    </section>
+    </Sheet>
   );
 };
 

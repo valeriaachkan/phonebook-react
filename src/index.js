@@ -11,7 +11,7 @@ import { BrowserRouter } from 'react-router-dom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/phonebook-react">
+    <BrowserRouter basename="phonebook-react">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <App />
