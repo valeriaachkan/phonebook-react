@@ -18,7 +18,6 @@ export const Form = () => {
   const dispatch = useDispatch();
 
   const contacts = useSelector(selectContacts);
-  console.log('contacts', contacts);
 
   const checkUniqueness = newName => {
     return contacts
@@ -71,8 +70,7 @@ export const Form = () => {
               type="tel"
               name="number"
               pattern="^[0-9]*$"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            />
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"></Input>
           </FormControl>
         </Stack>
         <Stack gap={2} sx={{ mt: 3 }}>

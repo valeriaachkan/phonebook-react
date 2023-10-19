@@ -19,10 +19,11 @@ export const signup = createAsyncThunk(
       const res = await axios.post('/users/signup', credentials);
       setAuthHeader(res.data.token);
       Notify.success('You have successfully signed up!');
-      console.log(res.data);
       return res.data;
     } catch (error) {
-      Notify.failure('Something went wrong! Please try again.');
+      Notify.failure(
+        `An account with email address ${credentials.email} already exists.`,
+      );
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -33,7 +34,6 @@ export const login = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.post('/users/login', credentials);
-      console.log(res.data);
       setAuthHeader(res.data.token);
       Notify.success('Logged in successfully.');
       return res.data;
@@ -44,28 +44,22 @@ export const login = createAsyncThunk(
   },
 );
 
-export const logout = createAsyncThunk(
-  'auth/logout',
-  async (token, thunkAPI) => {
-    try {
-      const res = await axios.post('/users/logout', token);
-      console.log(res.data);
-      clearAuthHeader();
-      Notify.success('You are logged out.');
-
-      return res.data;
-    } catch (error) {
-      Notify.failure('Something went wrong! Please try again.');
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-);
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    const res = await axios.post('/users/logout');
+    clearAuthHeader();
+    Notify.success('You are logged out.');
+    return res.data;
+  } catch (error) {
+    Notify.failure('Something went wrong! Please try again.');
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
 
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
     const { token } = thunkAPI.getState().auth;
-    console.log(token);
 
     if (token === null) {
       return thunkAPI.rejectWithValue('Unable to fetch user');
@@ -74,10 +68,8 @@ export const refreshUser = createAsyncThunk(
     try {
       setAuthHeader(token);
       const res = await axios.get('/users/current');
-      console.log('refreshed', res.data);
       return res.data;
     } catch (error) {
-      Notify.failure('Something went wrong! Please log in again.');
       return thunkAPI.rejectWithValue(error.message);
     }
   },
