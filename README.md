@@ -7,6 +7,6 @@ Phonebook React is a simple web application built with React.js that allows user
 ## Used technologies
 
 - ReactJS
-- CSS
+- Material UI
 - Redux Toolkit
 - Redux Persist
